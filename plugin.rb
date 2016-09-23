@@ -1,6 +1,6 @@
 # name: dice_roller
 # about: allows in-post dice rolling, for play-by-post RPGs
-# version: 0
+# version: 1
 # authors: dorthu
 # url: https://github.com/Dorthu/discourse-dice-roller
 
