@@ -35,7 +35,9 @@ after_initialize do
 
     def inline_roll(post)
         post.raw.gsub!(/\[ ?roll *([1-9]*d[0-9]+) *\]/i) { |c| roll_dice(c, post.user) }
-        post.set_owner(User.find(-1), post.user)
+        # Hardcoded to dicebot user, nice..
+        post.set_owner(User.find(470), post.user)
+        #post.set_owner(User.find(-1), post.user)
     end
 
     def append_roll(post)
