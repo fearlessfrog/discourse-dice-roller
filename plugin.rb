@@ -6,7 +6,7 @@
 
 after_initialize do
 
-    def roll_dice(type)
+    def roll_dice(type, user)
         num, size = type.match(/([1-9]*)d([0-9]+)/i).captures
 
         result = ''
@@ -25,16 +25,16 @@ after_initialize do
         end
 
         if num == 1
-            "`d#{size}:" + result[1..-1] + "`"
+            "@#{user.username} rolled `d#{size}:" + result[1..-1] + "`"
         elsif SiteSetting.dice_roller_sum_rolls
-            "`#{num}d#{size}:" + result[1..-1] + "= #{sum}`"
+            "@#{user.username} rolled `#{num}d#{size}:" + result[1..-1] + "= #{sum}`"
         else
-            "`#{num}d#{size}:" + result[1..-1] + "`"
+            "@#{user.username} rolled `#{num}d#{size}:" + result[1..-1] + "`"
         end
     end
 
     def inline_roll(post)
-        post.raw.gsub!(/\[ ?roll *([1-9]*d[0-9]+) *\]/i) { |c| roll_dice(c) }
+        post.raw.gsub!(/\[ ?roll *([1-9]*d[0-9]+) *\]/i) { |c| roll_dice(c, post.user) }
         post.set_owner(User.find(-1), post.user)
     end
 
