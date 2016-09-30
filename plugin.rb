@@ -1,6 +1,6 @@
 # name: dice_roller
 # about: allows in-post dice rolling, for play-by-post RPGs
-# version: 1
+# version: 2
 # authors: dorthu
 # url: https://github.com/Dorthu/discourse-dice-roller
 
@@ -27,7 +27,11 @@ after_initialize do
         if num == 1
             "@#{user.username} rolled `d#{size}:" + result[1..-1] + "`"
         elsif SiteSetting.dice_roller_sum_rolls
-            "@#{user.username} rolled `#{num}d#{size}:" + result[1..-1] + "= #{sum}`"
+            if num > 9
+              "Nope. Buy @wheelsup_cavu a beer though for finding the over 9 dice bug."
+            else
+              "@#{user.username} rolled `#{num}d#{size}:" + result[1..-1] + "= #{sum}`"
+            end
         else
             "@#{user.username} rolled `#{num}d#{size}:" + result[1..-1] + "`"
         end
